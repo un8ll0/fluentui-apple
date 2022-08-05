@@ -5,17 +5,59 @@
 
 import AppKit
 import FluentUI
+import SwiftUI
+// conforming to NSAccessibilityTable causes overlapping with NSView
+// subclassing NSScrollView to add custom accessibility support
+class CustomScrollView: NSScrollView {
+	var accessibilityCells : NSMutableArray = []
+	// override accessibilityRows to let
+	override func accessibilityRows() -> [Any]? {
+		return accessibilityCells as! [Any]?
+	}
+		
+	// override and set accessibilityRole to list
+	override func accessibilityRole() -> NSAccessibility.Role? {
+		return NSAccessibility.Role.table
+	}
+	// override isAccessibilityElement
+	override func isAccessibilityElement() -> Bool {
+		return true
+	}
+	
+	// return an array of accessible cell objects
+	public func populateSubviewstoAccessbilityCells(accessibilityRows:NSArray?) -> Void {
+		if (accessibilityRows == nil) {
+			return
+		}
+		accessibilityCells = NSMutableArray(capacity: accessibilityRows?.count ?? 0)
+		for row in accessibilityRows.unsafelyUnwrapped {
+			accessibilityCells.add(row)
+		}
+	}
+
+}
+
+// Color row View (child view of CustomScrollView)
+// RNM calls insertReactSubview to add each subview to scrollview
+// override accessibility
+class CustomColorRowView: NSObject {
+	//NSTextView
+	// TODO: can't subclass the child view due to RCTUIView mapping. super class stores incoming subviews in reactSubviews
+}
 
 class TestColorViewController: NSViewController {
 	var primaryColorsStackView = NSStackView()
 	var subviewConstraints = [NSLayoutConstraint]()
 	var toggleTextView = NSTextView(frame: NSRect(x: 0, y: 0, width: 100, height: 20))
 
+	var scrollView = CustomScrollView()
+	var rowArray = NSMutableArray()
 	override func loadView() {
 		let containerView = NSView()
-		let scrollView = NSScrollView()
+		//let scrollView = NSScrollView()
 		scrollView.translatesAutoresizingMaskIntoConstraints = false
 		scrollView.hasVerticalScroller = true
+
 		containerView.addSubview(scrollView)
 
 		let colorsStackView = NSStackView()
@@ -36,47 +78,71 @@ class TestColorViewController: NSViewController {
 		let documentView = NSView()
 		documentView.translatesAutoresizingMaskIntoConstraints = false
 		scrollView.documentView = documentView
-		documentView.addSubview(colorsStackView)
-		documentView.addSubview(primaryColorsStackView)
+		let textview1 = NSTextField(labelWithString: "textview1")
+		textview1.translatesAutoresizingMaskIntoConstraints = false
 
+		let textview2 = NSTextField(labelWithString: "textview2")
+		let textview3 = NSTextField(labelWithString: "textview3")
+		let textview4 = NSTextField(labelWithString: "textview4")
+		let textview5 = NSTextField(labelWithString: "textview5")
+		textview2.translatesAutoresizingMaskIntoConstraints = false
+		textview3.translatesAutoresizingMaskIntoConstraints = false
+		textview4.translatesAutoresizingMaskIntoConstraints = false
+		textview5.translatesAutoresizingMaskIntoConstraints = false
+		
+		textview1.font = .systemFont(ofSize: 100)
+		textview2.font = .systemFont(ofSize: 100)
+		textview3.font = .systemFont(ofSize: 100)
+		textview4.font = .systemFont(ofSize: 100)
+		textview5.font = .systemFont(ofSize: 100)
+		
+		let primaryColorView = ColorRectView(color: Colors.primary)
+		primaryColorView.translatesAutoresizingMaskIntoConstraints = false
+		rowArray.add(textview1)
+		rowArray.add(textview2)
+		rowArray.add(textview3)
+		rowArray.add(textview4)
+		rowArray.add(textview5)
+		rowArray.add(primaryColorView)
+		scrollView.populateSubviewstoAccessbilityCells(accessibilityRows: rowArray)
+		//documentView.addSubview(colorsStackView)
+		//documentView.addSubview(primaryColorsStackView)
+		//documentView.addSubview(rowArray)
+		
+		documentView.addSubview(textview1)
+		documentView.addSubview(textview2)
+		documentView.addSubview(textview3)
+		documentView.addSubview(textview4)
+		documentView.addSubview(textview5)
+		documentView.addSubview(primaryColorView)
 		subviewConstraints = [
 			containerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
 			containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-			colorsStackView.topAnchor.constraint(equalTo: documentView.topAnchor, constant: colorRowSpacing),
-			colorsStackView.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
-			colorsStackView.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
-			primaryColorsStackView.topAnchor.constraint(equalTo: colorsStackView.bottomAnchor, constant: colorRowSpacing),
-			primaryColorsStackView.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
-			primaryColorsStackView.trailingAnchor.constraint(equalTo: documentView.trailingAnchor)
+			textview1.topAnchor.constraint(equalTo: documentView.topAnchor, constant: colorRowSpacing),
+			textview1.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			textview1.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
+			textview2.topAnchor.constraint(equalTo: textview1.bottomAnchor, constant: colorRowSpacing),
+			textview2.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			textview2.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
+			
+			textview3.topAnchor.constraint(equalTo: textview2.bottomAnchor, constant: colorRowSpacing),
+			textview3.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			textview3.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
+			
+			textview4.topAnchor.constraint(equalTo: textview3.bottomAnchor, constant: colorRowSpacing),
+			textview4.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			textview4.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
+			
+			textview5.topAnchor.constraint(equalTo: textview4.bottomAnchor, constant: colorRowSpacing),
+			textview5.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			textview5.trailingAnchor.constraint(equalTo: documentView.trailingAnchor),
+			primaryColorView.topAnchor.constraint(equalTo: textview5.bottomAnchor, constant: colorRowSpacing),
+			primaryColorView.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
+			primaryColorView.trailingAnchor.constraint(equalTo: documentView.trailingAnchor)
 		]
 
-		if #available(OSX 10.15, *) {
-			let switchButton = NSSwitch(frame: CGRect(x: 1, y: 1, width: 100, height: 50))
-			switchButton.target = self
-			switchButton.action = #selector(toggleClicked)
-			toggleTextView.string = "Default"
-			toggleTextView.font = .systemFont(ofSize: 20)
-			toggleTextView.isEditable = false
-			toggleTextView.isSelectable = false
-			toggleTextView.backgroundColor = .clear
 
-			let toggleStackView = NSStackView()
-			toggleStackView.translatesAutoresizingMaskIntoConstraints = false
-			toggleStackView.orientation = .horizontal
-			toggleStackView.spacing = 20.0
-			toggleStackView.addArrangedSubview(switchButton)
-			toggleStackView.addArrangedSubview(toggleTextView)
-			documentView.addSubview(toggleStackView)
-
-			subviewConstraints.append(contentsOf: [
-				toggleStackView.topAnchor.constraint(equalTo: primaryColorsStackView.bottomAnchor, constant: colorRowSpacing),
-				toggleStackView.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: colorRowSpacing),
-				toggleStackView.trailingAnchor.constraint(equalTo: documentView.trailingAnchor, constant: colorRowSpacing),
-				toggleStackView.bottomAnchor.constraint(equalTo: documentView.bottomAnchor, constant: -colorRowSpacing)
-			])
-		} else {
-			subviewConstraints.append(primaryColorsStackView.bottomAnchor.constraint(equalTo: documentView.bottomAnchor, constant: -colorRowSpacing))
-		}
+			subviewConstraints.append(primaryColorView.bottomAnchor.constraint(equalTo: documentView.bottomAnchor, constant: -colorRowSpacing))
 
 		NSLayoutConstraint.activate(subviewConstraints)
 		view = containerView
@@ -84,9 +150,13 @@ class TestColorViewController: NSViewController {
 
 	private func createColorRowStackView(name: String?, color: NSColor?) -> NSStackView {
 		let rowStackView = NSStackView()
+		rowStackView.setAccessibilityElement(true)
+		rowStackView.focusRingType = NSFocusRingType.exterior
+		rowStackView.setAccessibilityRole(NSAccessibility.Role.row)
 		let textView = NSTextField(labelWithString: name!)
 		let primaryColorView = ColorRectView(color: color!)
 		textView.font = .systemFont(ofSize: 18)
+		rowStackView.setAccessibilityLabel(textView.stringValue)
 		rowStackView.orientation = .horizontal
 		rowStackView.spacing = 20.0
 		rowStackView.addArrangedSubview(primaryColorView)
