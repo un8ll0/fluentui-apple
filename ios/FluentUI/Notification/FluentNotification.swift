@@ -50,11 +50,6 @@ import SwiftUI
 
     /// Defines whether the notification shows from the bottom of the presenting view or the top.
     var showFromBottom: Bool { get set }
-
-    /// An optional gradient to use as the background of the notification.
-    ///
-    /// If this property is nil, then this notification will use the background color defined by its design tokens.
-    var backgroundGradient: GradientInfo? { get set }
 }
 
 /// View that represents the Notification.
@@ -259,21 +254,6 @@ public struct FluentNotification: View, TokenizedControlView {
         }
 
         @ViewBuilder
-        var backgroundFill: some View {
-            if let backgroundGradient = state.backgroundGradient {
-                GeometryReader { g in
-                    // The gradient needs to be rendered square, then scaled to fit the containing view.
-                    // Otherwise SwiftUI will crop the gradient view, which is not what we want!
-                    LinearGradient(gradientInfo: backgroundGradient)
-                        .frame(width: g.size.width, height: g.size.width)
-                        .scaleEffect(x: 1.0, y: g.size.height / g.size.width, anchor: .top)
-                }
-            } else {
-                Color(dynamicColor: tokenSet[.backgroundColor].dynamicColor)
-            }
-        }
-
-        @ViewBuilder
         var notification: some View {
             let shadowInfo = tokenSet[.shadow].shadowInfo
             innerContents
@@ -281,8 +261,8 @@ public struct FluentNotification: View, TokenizedControlView {
                     RoundedRectangle(cornerRadius: tokenSet[.cornerRadius].float)
                         .strokeBorder(Color(dynamicColor: tokenSet[.outlineColor].dynamicColor), lineWidth: tokenSet[.outlineWidth].float)
                         .background(
-                            backgroundFill
-                                .clipShape(RoundedRectangle(cornerRadius: tokenSet[.cornerRadius].float))
+                            RoundedRectangle(cornerRadius: tokenSet[.cornerRadius].float)
+                                .fill(Color(dynamicColor: tokenSet[.backgroundColor].dynamicColor))
                         )
                         .shadow(color: Color(dynamicColor: shadowInfo.colorOne),
                                 radius: shadowInfo.blurOne,
@@ -403,32 +383,31 @@ public struct FluentNotification: View, TokenizedControlView {
 }
 
 class MSFNotificationStateImpl: ControlState, MSFNotificationState {
-    @Published var message: String?
-    @Published var attributedMessage: NSAttributedString?
-    @Published var title: String?
-    @Published var attributedTitle: NSAttributedString?
-    @Published var image: UIImage?
-    @Published var trailingImage: UIImage?
-    @Published var trailingImageAccessibilityLabel: String?
-    @Published var showDefaultDismissActionButton: Bool
-    @Published var showFromBottom: Bool = true
-    @Published var backgroundGradient: GradientInfo?
+    @Published public var message: String?
+    @Published public var attributedMessage: NSAttributedString?
+    @Published public var title: String?
+    @Published public var attributedTitle: NSAttributedString?
+    @Published public var image: UIImage?
+    @Published public var trailingImage: UIImage?
+    @Published public var trailingImageAccessibilityLabel: String?
+    @Published public var showDefaultDismissActionButton: Bool
+    @Published public var showFromBottom: Bool = true
 
     /// Title to display in the action button on the trailing edge of the control.
     ///
     /// To show an action button, provide values for both `actionButtonTitle` and  `actionButtonAction`.
-    @Published var actionButtonTitle: String?
+    @Published public var actionButtonTitle: String?
 
     /// Action to be dispatched by the action button on the trailing edge of the control.
     ///
     /// To show an action button, provide values for both `actionButtonTitle` and  `actionButtonAction`.
-    @Published var actionButtonAction: (() -> Void)?
+    @Published public var actionButtonAction: (() -> Void)?
 
     /// Action to be dispatched by tapping on the toast/bar notification.
-    @Published var messageButtonAction: (() -> Void)?
+    @Published public var messageButtonAction: (() -> Void)?
 
     /// Style to draw the control.
-    @Published var style: MSFNotificationStyle
+    @Published public var style: MSFNotificationStyle
 
     @objc convenience init(style: MSFNotificationStyle) {
         self.init(style: style,

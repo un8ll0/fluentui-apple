@@ -77,17 +77,17 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .float({
                     switch style() {
                     case .default, .accent, .outlined, .outlinedPrimary, .overflow:
-                        return GlobalTokens.borderRadius(.none)
+                        return theme.globalTokens.borderRadius[.none]
                     case .group:
                         switch size() {
                         case .xsmall:
-                            return GlobalTokens.borderRadius(.small)
+                            return theme.globalTokens.borderRadius[.small]
                         case .small, .medium:
-                            return GlobalTokens.borderRadius(.medium)
+                            return theme.globalTokens.borderRadius[.medium]
                         case .large, .xlarge:
-                            return GlobalTokens.borderRadius(.large)
+                            return theme.globalTokens.borderRadius[.large]
                         case .xxlarge:
-                            return GlobalTokens.borderRadius(.xLarge)
+                            return theme.globalTokens.borderRadius[.xLarge]
                         }
                     }
                 })
@@ -96,7 +96,7 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .fontInfo({
                     switch size() {
                     case .xsmall:
-                        return .init(size: 9, weight: GlobalTokens.fontWeight(.regular))
+                        return .init(size: 9, weight: theme.globalTokens.fontWeight[.regular])
                     case .small:
                         return theme.aliasTokens.typography[.caption2]
                     case .medium:
@@ -104,9 +104,9 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                     case .large:
                         return theme.aliasTokens.typography[.body2]
                     case .xlarge:
-                        return .init(size: GlobalTokens.fontSize(.size500), weight: GlobalTokens.fontWeight(.regular))
+                        return .init(size: theme.globalTokens.fontSize[.size500], weight: theme.globalTokens.fontWeight[.regular])
                     case .xxlarge:
-                        return .init(size: GlobalTokens.fontSize(.size700), weight: GlobalTokens.fontWeight(.semibold))
+                        return .init(size: theme.globalTokens.fontSize[.size700], weight: theme.globalTokens.fontWeight[.semibold])
                     }
                 })
 
@@ -114,13 +114,13 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .dynamicColor({
                     switch style() {
                     case .default, .group:
-                        return theme.aliasTokens.brandColors[.tint10]
+                        return theme.globalTokens.brandColors[.tint10]
                     case .accent:
-                        return theme.aliasTokens.brandColors[.shade10]
+                        return theme.globalTokens.brandColors[.shade10]
                     case .outlined, .overflow:
                         return theme.aliasTokens.backgroundColors[.neutralDisabled]
                     case .outlinedPrimary:
-                        return .init(light: theme.aliasTokens.brandColors[.tint10].light, dark: GlobalTokens.neutralColors(.grey78))
+                        return .init(light: theme.globalTokens.brandColors[.tint10].light, dark: theme.globalTokens.neutralColors[.grey78])
                     }
                 })
 
@@ -133,11 +133,11 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .float({
                     switch size() {
                     case .xsmall, .small:
-                        return GlobalTokens.borderSize(.thin)
+                        return theme.globalTokens.borderSize[.thin]
                     case .medium, .large, .xlarge:
-                        return GlobalTokens.borderSize(.thick)
+                        return theme.globalTokens.borderSize[.thick]
                     case .xxlarge:
-                        return GlobalTokens.borderSize(.thicker)
+                        return theme.globalTokens.borderSize[.thicker]
                     }
                 })
 
@@ -145,9 +145,9 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .float({
                     switch size() {
                     case .xsmall, .small, .medium, .large, .xlarge:
-                        return GlobalTokens.borderSize(.thick)
+                        return theme.globalTokens.borderSize[.thick]
                     case .xxlarge:
-                        return GlobalTokens.borderSize(.thicker)
+                        return theme.globalTokens.borderSize[.thicker]
                     }
                 })
 
@@ -155,9 +155,9 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .float({
                     switch size() {
                     case .xsmall, .small, .medium, .large, .xlarge:
-                        return GlobalTokens.borderSize(.thick)
+                        return theme.globalTokens.borderSize[.thick]
                     case .xxlarge:
-                        return GlobalTokens.borderSize(.thicker)
+                        return theme.globalTokens.borderSize[.thicker]
                     }
                 })
 
@@ -167,11 +167,11 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                     case .xsmall:
                         return 0
                     case .small, .medium:
-                        return GlobalTokens.iconSize(.xxxSmall)
+                        return theme.globalTokens.iconSize[.xxxSmall]
                     case .large, .xlarge:
-                        return GlobalTokens.iconSize(.xxSmall)
+                        return theme.globalTokens.iconSize[.xxSmall]
                     case .xxlarge:
-                        return GlobalTokens.iconSize(.small)
+                        return theme.globalTokens.iconSize[.small]
                     }
                 })
 
@@ -179,9 +179,9 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .float({
                     switch size() {
                     case .xsmall:
-                        return GlobalTokens.borderSize(.none)
+                        return theme.globalTokens.borderSize[.none]
                     case .small, .medium, .large, .xlarge, .xxlarge:
-                        return GlobalTokens.borderSize(.thick)
+                        return theme.globalTokens.borderSize[.thick]
                     }
                 })
 
@@ -194,13 +194,13 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .dynamicColor({
                     switch style() {
                     case .default, .group:
-                        return .init(light: GlobalTokens.neutralColors(.white), dark: theme.aliasTokens.brandColors[.primary].dark)
+                        return .init(light: theme.globalTokens.neutralColors[.white], dark: theme.globalTokens.brandColors[.primary].dark)
                     case .accent:
-                        return theme.aliasTokens.brandColors[.primary]
+                        return theme.globalTokens.brandColors[.primary]
                     case .outlined:
-                        return .init(light: GlobalTokens.neutralColors(.grey94), dark: GlobalTokens.neutralColors(.grey26))
+                        return .init(light: theme.globalTokens.neutralColors[.grey94], dark: theme.globalTokens.neutralColors[.grey26])
                     case .outlinedPrimary:
-                        return .init(light: theme.aliasTokens.brandColors[.tint40].light, dark: GlobalTokens.neutralColors(.grey26))
+                        return .init(light: theme.globalTokens.brandColors[.tint40].light, dark: theme.globalTokens.neutralColors[.grey26])
                     case .overflow:
                         return theme.aliasTokens.backgroundColors[.neutral4]
                     }
@@ -210,13 +210,13 @@ public class AvatarTokenSet: ControlTokenSet<AvatarTokenSet.Tokens> {
                 return .dynamicColor({
                     switch style() {
                     case .default, .group:
-                        return .init(light: theme.aliasTokens.brandColors[.primary].light, dark: GlobalTokens.neutralColors(.black))
+                        return .init(light: theme.globalTokens.brandColors[.primary].light, dark: theme.globalTokens.neutralColors[.black])
                     case .accent:
                         return theme.aliasTokens.foregroundColors[.neutralInverted]
                     case .outlined:
-                        return .init(light: GlobalTokens.neutralColors(.grey42), dark: GlobalTokens.neutralColors(.grey78))
+                        return .init(light: theme.globalTokens.neutralColors[.grey42], dark: theme.globalTokens.neutralColors[.grey78])
                     case .outlinedPrimary:
-                        return .init(light: theme.aliasTokens.brandColors[.primary].light, dark: GlobalTokens.neutralColors(.grey78))
+                        return .init(light: theme.globalTokens.brandColors[.primary].light, dark: theme.globalTokens.neutralColors[.grey78])
                     case .overflow:
                         return theme.aliasTokens.foregroundColors[.neutral3]
                     }

@@ -39,7 +39,10 @@ class TypographyTokensDemoController: DemoTableViewController {
     }
 
     private var aliasTokens: AliasTokens {
-        return self.view.fluentTheme.aliasTokens
+        guard let fluentTheme = self.view.window?.fluentTheme else {
+            return AliasTokens()
+        }
+        return fluentTheme.aliasTokens
     }
 
     private struct Constants {

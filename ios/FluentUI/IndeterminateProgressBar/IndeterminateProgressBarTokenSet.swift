@@ -29,7 +29,7 @@ public class IndeterminateProgressBarTokenSet: ControlTokenSet<IndeterminateProg
 
             case .gradientColor:
                 return .dynamicColor {
-                    theme.aliasTokens.brandColors[.primary]
+                    theme.globalTokens.brandColors[.primary]
                 }
 
             case .height:

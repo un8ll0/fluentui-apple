@@ -30,9 +30,9 @@ public class DividerTokenSet: ControlTokenSet<DividerTokenSet.Tokens> {
                 return .float {
                     switch spacing() {
                     case .none:
-                        return GlobalTokens.spacing(.none)
+                        return theme.globalTokens.spacing[.none]
                     case .medium:
-                        return GlobalTokens.spacing(.medium)
+                        return theme.globalTokens.spacing[.medium]
                     }
                 }
 

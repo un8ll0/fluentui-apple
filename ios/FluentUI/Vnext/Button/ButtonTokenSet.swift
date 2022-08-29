@@ -91,9 +91,9 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                 return .float {
                     switch size() {
                     case .small, .medium:
-                        return GlobalTokens.borderRadius(.large)
+                        return theme.globalTokens.borderRadius[.large]
                     case .large:
-                        return GlobalTokens.borderRadius(.xLarge)
+                        return theme.globalTokens.borderRadius[.xLarge]
                     }
                 }
 
@@ -101,9 +101,9 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                 return .float {
                     switch style() {
                     case .primary, .ghost, .accentFloating, .subtleFloating:
-                        return GlobalTokens.borderSize(.none)
+                        return theme.globalTokens.borderSize[.none]
                     case .secondary:
-                        return GlobalTokens.borderSize(.thin)
+                        return theme.globalTokens.borderSize[.thin]
                     }
                 }
 
@@ -113,13 +113,13 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                     case .primary, .secondary, .ghost:
                         switch size() {
                         case .small:
-                            return GlobalTokens.iconSize(.xSmall)
+                            return theme.globalTokens.iconSize[.xSmall]
                         case .medium,
                                 .large:
-                            return GlobalTokens.iconSize(.small)
+                            return theme.globalTokens.iconSize[.small]
                         }
                     case .accentFloating, .subtleFloating:
-                        return GlobalTokens.iconSize(.medium)
+                        return theme.globalTokens.iconSize[.medium]
                     }
                 }
 
@@ -129,12 +129,12 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                     case .primary, .secondary, .ghost:
                         switch size() {
                         case .small:
-                            return GlobalTokens.spacing(.xxSmall)
+                            return theme.globalTokens.spacing[.xxSmall]
                         case .medium, .large:
-                            return GlobalTokens.spacing(.xSmall)
+                            return theme.globalTokens.spacing[.xSmall]
                         }
                     case .accentFloating, .subtleFloating:
-                        return GlobalTokens.spacing(.xSmall)
+                        return theme.globalTokens.spacing[.xSmall]
                     }
                 }
 
@@ -144,25 +144,25 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                     case .primary, .secondary, .ghost:
                         switch size() {
                         case .small:
-                            return GlobalTokens.spacing(.xSmall)
+                            return theme.globalTokens.spacing[.xSmall]
                         case .medium:
-                            return GlobalTokens.spacing(.small)
+                            return theme.globalTokens.spacing[.small]
                         case .large:
-                            return GlobalTokens.spacing(.large)
+                            return theme.globalTokens.spacing[.large]
                         }
                     case .accentFloating:
                         switch size() {
                         case .small, .medium:
-                            return GlobalTokens.spacing(.small)
+                            return theme.globalTokens.spacing[.small]
                         case .large:
-                            return GlobalTokens.spacing(.medium)
+                            return theme.globalTokens.spacing[.medium]
                         }
                     case .subtleFloating:
                         switch size() {
                         case .small, .medium:
-                            return GlobalTokens.spacing(.small)
+                            return theme.globalTokens.spacing[.small]
                         case .large:
-                            return GlobalTokens.spacing(.medium)
+                            return theme.globalTokens.spacing[.medium]
                         }
                     }
                 }
@@ -195,15 +195,15 @@ public class ButtonTokenSet: ControlTokenSet<ButtonTokenSet.Tokens> {
                 }
 
             case .textMinimumHeight:
-                return .float { GlobalTokens.iconSize(.medium) }
+                return .float { theme.globalTokens.iconSize[.medium] }
 
             case .textAdditionalHorizontalPadding:
                 return .float {
                     switch size() {
                     case .small, .medium:
-                        return GlobalTokens.spacing(.xSmall)
+                        return theme.globalTokens.spacing[.xSmall]
                     case .large:
-                        return GlobalTokens.spacing(.xxSmall)
+                        return theme.globalTokens.spacing[.xxSmall]
                     }
                 }
 

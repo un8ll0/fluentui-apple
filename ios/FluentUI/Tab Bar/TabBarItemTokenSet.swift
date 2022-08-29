@@ -86,28 +86,28 @@ class TabBarItemTokenSet: ControlTokenSet<TabBarItemTokenSet.Tokens> {
                 return .float { 3.0 }
 
             case .spacingHorizontal:
-                return .float { GlobalTokens.spacing(.xSmall) }
+                return .float { theme.globalTokens.spacing[.xSmall] }
 
             case .portraitImageSize:
-                return .float { GlobalTokens.iconSize(.large) }
+                return .float { theme.globalTokens.iconSize[.large] }
 
             case .portraitImageWithLabelSize:
-                return .float { GlobalTokens.iconSize(.medium) }
+                return .float { theme.globalTokens.iconSize[.medium] }
 
             case .landscapeImageSize:
-                return .float { GlobalTokens.iconSize(.medium) }
+                return .float { theme.globalTokens.iconSize[.medium] }
 
             case .badgeVerticalOffset:
-                return .float { -GlobalTokens.spacing(.xxSmall) }
+                return .float { -theme.globalTokens.spacing[.xxSmall] }
 
             case .badgePortraitTitleVerticalOffset:
-                return .float { -GlobalTokens.spacing(.xxxSmall) }
+                return .float { -theme.globalTokens.spacing[.xxxSmall] }
 
             case .singleDigitBadgeHorizontalOffset:
                 return .float { 14.0 }
 
             case .multiDigitBadgeHorizontalOffset:
-                return .float { GlobalTokens.spacing(.small) }
+                return .float { theme.globalTokens.spacing[.small] }
 
             case .badgeHeight:
                 return .float { 16.0 }
@@ -119,7 +119,7 @@ class TabBarItemTokenSet: ControlTokenSet<TabBarItemTokenSet.Tokens> {
                 return .float { 42.0 }
 
             case .badgeBorderWidth:
-                return .float { GlobalTokens.borderSize(.thick) }
+                return .float { theme.globalTokens.borderSize[.thick] }
 
             case .badgeHorizontalPadding:
                 return .float { 10.0 }

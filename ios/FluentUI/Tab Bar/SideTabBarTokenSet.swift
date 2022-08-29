@@ -61,7 +61,7 @@ public class SideTabBarTokenSet: ControlTokenSet<SideTabBarTokenSet.Tokens> {
                 return .float { 18.0 }
 
             case .avatarViewMinTopSpacing:
-                return .float { GlobalTokens.spacing(.xxLarge) }
+                return .float { theme.globalTokens.spacing[.xxLarge] }
 
             case .avatarViewTopStackViewSpacing:
                 return .float { 34.0 }
@@ -70,13 +70,13 @@ public class SideTabBarTokenSet: ControlTokenSet<SideTabBarTokenSet.Tokens> {
                 return .float { 14.0 }
 
             case .bottomStackViewMinSpacing:
-                return .float { GlobalTokens.spacing(.xLarge) }
+                return .float { theme.globalTokens.spacing[.xLarge] }
 
             case .topTabBarItemSpacing:
                 return .float { 32.0 }
 
             case .bottomTabBarItemSpacing:
-                return .float { GlobalTokens.spacing(.xLarge) }
+                return .float { theme.globalTokens.spacing[.xLarge] }
 
             case .badgeTopSectionPadding:
                 return .float { 2.0 }

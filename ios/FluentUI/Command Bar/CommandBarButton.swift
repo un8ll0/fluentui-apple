@@ -82,7 +82,7 @@ class CommandBarButton: UIButton {
 
         if #available(iOS 15.0, *) {
             configuration?.image = iconImage
-            configuration?.title = iconImage != nil ? nil : title
+            configuration?.title = title
 
             if let font = item.titleFont {
                 let attributeContainer = AttributeContainer([NSAttributedString.Key.font: font])

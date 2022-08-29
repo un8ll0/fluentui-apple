@@ -148,8 +148,8 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
             switch token {
             case .backgroundColor:
                 return .dynamicColor {
-                    .init(light: GlobalTokens.neutralColors(.white),
-                          dark: GlobalTokens.neutralColors(.black))
+                    .init(light: theme.globalTokens.neutralColors[.white],
+                          dark: theme.globalTokens.neutralColors[.black])
                 }
 
             case .backgroundGroupedColor:
@@ -184,9 +184,9 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                     case .zero:
                         return 0.0
                     case .small:
-                        return GlobalTokens.iconSize(.medium)
+                        return theme.globalTokens.iconSize[.medium]
                     case .medium, .default:
-                        return GlobalTokens.iconSize(.xxLarge)
+                        return theme.globalTokens.iconSize[.xxLarge]
                     }
                 }
 
@@ -194,11 +194,11 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .float {
                     switch customViewSize() {
                     case .zero:
-                        return GlobalTokens.spacing(.none)
+                        return theme.globalTokens.spacing[.none]
                     case .small:
-                        return GlobalTokens.spacing(.medium)
+                        return theme.globalTokens.spacing[.medium]
                     case .medium, .default:
-                        return GlobalTokens.spacing(.small)
+                        return theme.globalTokens.spacing[.small]
                     }
                 }
 
@@ -239,13 +239,13 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .float { 18 }
 
             case .labelAccessoryViewMarginLeading:
-                return .float { GlobalTokens.spacing(.xSmall) }
+                return .float { theme.globalTokens.spacing[.xSmall] }
 
             case .labelAccessoryViewMarginTrailing:
-                return .float { GlobalTokens.spacing(.xSmall) }
+                return .float { theme.globalTokens.spacing[.xSmall] }
 
             case .customAccessoryViewMarginLeading:
-                return .float { GlobalTokens.spacing(.xSmall) }
+                return .float { theme.globalTokens.spacing[.xSmall] }
 
             case .customAccessoryViewMinVerticalMargin:
                 return .float { 6 }
@@ -254,13 +254,13 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .float { 11 }
 
             case .labelVerticalMarginForTwoLines:
-                return .float { GlobalTokens.spacing(.small) }
+                return .float { theme.globalTokens.spacing[.small] }
 
             case .labelVerticalSpacing:
-                return .float { GlobalTokens.spacing(.none) }
+                return .float { theme.globalTokens.spacing[.none] }
 
             case .minHeight:
-                return .float { GlobalTokens.spacing(.xxxLarge) }
+                return .float { theme.globalTokens.spacing[.xxxLarge] }
 
             case .mediumHeight:
                 return .float { 64 }
@@ -269,10 +269,10 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .float { 84 }
 
             case .selectionImageMarginTrailing:
-                return .float { GlobalTokens.spacing(.medium) }
+                return .float { theme.globalTokens.spacing[.medium] }
 
             case .selectionImageSize:
-                return .float { GlobalTokens.iconSize(.medium) }
+                return .float { theme.globalTokens.iconSize[.medium] }
 
             case .selectionModeAnimationDuration:
                 return .float { 0.2 }
@@ -287,16 +287,16 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .float { 0.35 }
 
             case .horizontalSpacing:
-                return .float { GlobalTokens.spacing(.medium) }
+                return .float { theme.globalTokens.spacing[.medium] }
 
             case .paddingLeading:
-                return .float { GlobalTokens.spacing(.medium) }
+                return .float { theme.globalTokens.spacing[.medium] }
 
             case .paddingVertical:
                 return .float { 11 }
 
             case .paddingTrailing:
-                return .float { GlobalTokens.spacing(.medium) }
+                return .float { theme.globalTokens.spacing[.medium] }
 
             case .accessoryDisclosureIndicatorColor:
                 return .dynamicColor { theme.aliasTokens.foregroundColors[.neutral4] }
@@ -305,7 +305,7 @@ public class TableViewCellTokenSet: ControlTokenSet<TableViewCellTokenSet.Tokens
                 return .dynamicColor { theme.aliasTokens.foregroundColors[.neutral3] }
 
             case .mainBrandColor:
-                return .dynamicColor { theme.aliasTokens.brandColors[.primary] }
+                return .dynamicColor { theme.globalTokens.brandColors[.primary] }
 
             case .destructiveTextColor:
                 return .dynamicColor {

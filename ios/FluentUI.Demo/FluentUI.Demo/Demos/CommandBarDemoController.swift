@@ -79,8 +79,6 @@ class CommandBarDemoController: DemoController {
                 return TextStyle.body.textRepresentation
             case .disabledText:
                 return "Search"
-            case .add:
-                return "Add"
             default:
                 return nil
             }

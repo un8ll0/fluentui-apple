@@ -24,10 +24,10 @@ public class CommandBarTokenSet: ControlTokenSet<CommandBarTokenSet.Tokens> {
                 return .dynamicColor { theme.aliasTokens.backgroundColors[.neutral1] }
 
             case .groupBorderRadius:
-                return .float { GlobalTokens.borderRadius(.xLarge) }
+                return .float { theme.globalTokens.borderRadius[.xLarge] }
 
             case .groupInterspace:
-                return .float { GlobalTokens.spacing(.medium) }
+                return .float { theme.globalTokens.spacing[.medium] }
 
             case .itemBackgroundColor:
                 return .buttonDynamicColors {
@@ -56,7 +56,7 @@ public class CommandBarTokenSet: ControlTokenSet<CommandBarTokenSet.Tokens> {
                 }
 
             case .itemInterspace:
-                return .float { GlobalTokens.spacing(.xxxSmall) }
+                return .float { theme.globalTokens.spacing[.xxxSmall] }
             }
         }
     }

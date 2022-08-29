@@ -197,7 +197,7 @@ class LeftNavMenuViewController: UIViewController {
             }
         }
 
-        let aliasTokens = contentView.fluentTheme.aliasTokens
+        let aliasTokens = AliasTokens()
         let tintDynamicColor = aliasTokens.foregroundColors[.neutral4]
         let tintColor = UIColor(dynamicColor: tintDynamicColor)
 

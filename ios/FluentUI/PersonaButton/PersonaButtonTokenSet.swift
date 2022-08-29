@@ -68,9 +68,9 @@ public class PersonaButtonTokenSet: ControlTokenSet<PersonaButtonTokenSet.Tokens
                 return .float {
                     switch size() {
                     case .small:
-                        return GlobalTokens.spacing(.xSmall)
+                        return theme.globalTokens.spacing[.xSmall]
                     case .large:
-                        return GlobalTokens.spacing(.small)
+                        return theme.globalTokens.spacing[.small]
                     }
                 }
 
@@ -81,14 +81,14 @@ public class PersonaButtonTokenSet: ControlTokenSet<PersonaButtonTokenSet.Tokens
                 return .float {
                     switch size() {
                     case .small:
-                        return GlobalTokens.spacing(.medium)
+                        return theme.globalTokens.spacing[.medium]
                     case .large:
-                        return GlobalTokens.spacing(.xSmall)
+                        return theme.globalTokens.spacing[.xSmall]
                     }
                 }
 
             case .horizontalTextPadding:
-                return .float { GlobalTokens.spacing(.xxxSmall) }
+                return .float { theme.globalTokens.spacing[.xxxSmall] }
 
             case .labelColor:
                 return .dynamicColor { theme.aliasTokens.foregroundColors[.neutral1] }
@@ -110,7 +110,7 @@ public class PersonaButtonTokenSet: ControlTokenSet<PersonaButtonTokenSet.Tokens
                 return .fontInfo { theme.aliasTokens.typography[.caption1] }
 
             case .verticalPadding:
-                return .float { GlobalTokens.spacing(.xSmall) }
+                return .float { theme.globalTokens.spacing[.xSmall] }
             }
         }
     }

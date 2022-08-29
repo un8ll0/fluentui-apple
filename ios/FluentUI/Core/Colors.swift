@@ -27,8 +27,9 @@ public protocol ColorProviding {
     @objc func primaryShade30Color(for window: UIWindow) -> UIColor?
 }
 
-private func brandColorOverrides(provider: ColorProviding, for window: UIWindow) -> [AliasTokens.BrandColorsTokens: DynamicColor] {
-    var brandColors: [AliasTokens.BrandColorsTokens: DynamicColor] = [:]
+private func brandedGlobalTokens(provider: ColorProviding, for window: UIWindow) -> GlobalTokens {
+    let globalTokens = GlobalTokens()
+    let brandColors = globalTokens.brandColors
     if let primary = provider.primaryColor(for: window)?.dynamicColor {
         brandColors[.primary] = primary
     }
@@ -53,7 +54,7 @@ private func brandColorOverrides(provider: ColorProviding, for window: UIWindow)
     if let shade30 = provider.primaryShade30Color(for: window)?.dynamicColor {
         brandColors[.shade30] = shade30
     }
-    return brandColors
+    return globalTokens
 }
 
 // MARK: Colors
@@ -488,12 +489,8 @@ public final class Colors: NSObject {
         colorProvidersMap.setObject(provider, forKey: window)
 
         // Create an updated fluent theme as well
-        let brandColors = brandColorOverrides(provider: provider, for: window)
-        let fluentTheme = FluentTheme()
-        brandColors.forEach { token, value in
-            fluentTheme.aliasTokens.brandColors[token] = value
-        }
-        window.fluentTheme = fluentTheme
+        let globalTokens = brandedGlobalTokens(provider: provider, for: window)
+        window.fluentTheme = FluentTheme(globalTokens: globalTokens)
     }
 
     /// Removes any associated `ColorProvider` from the given `UIWindow` instance.
